@@ -12,7 +12,6 @@
             min-height: 100vh;
         }
 
-        /* TASK 1: NAVIGATION BAR WITH FLEXBOX */
         .header {
             background: linear-gradient(135deg, #495057, #343a40);
             padding: 1rem 0;
@@ -26,9 +25,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-            /* FLEXBOX: Turn header container into flex container */
             display: flex;
-            justify-content: space-between; /* Align logo and links horizontally */
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -49,7 +47,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem; /* FLEXBOX: Apply spacing between links using gap */
+            gap: 2rem;
             align-items: center;
         }
 
@@ -68,7 +66,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        /* TASK 3: PAGE LAYOUT WITH GRID AREAS */
         .page-layout {
             display: grid;
             grid-template-areas: 
@@ -84,7 +81,7 @@
         }
 
         .sidebar {
-            grid-area: sidebar; /* Assign grid area for sidebar */
+            grid-area: sidebar;
             background: rgba(255,255,255,0.95);
             padding: 2rem;
             border-radius: 15px;
@@ -181,16 +178,15 @@
         }
 
         .cards-container {
-            /* FLEXBOX: Make container a flex container for cards in a row */
             display: flex;
-            gap: 2rem; /* Add consistent gaps between cards */
+            gap: 2rem; 
             margin-bottom: 3rem;
-            align-items: stretch; /* Ensure all cards have equal height */
+            align-items: stretch;
             flex-wrap: wrap;
         }
 
         .feature-card {
-            flex: 1; /* Equal width cards */
+            flex: 1;
             min-width: 280px;
             background: rgba(255,255,255,0.95);
             padding: 2rem;
@@ -198,16 +194,14 @@
             text-align: center;
             box-shadow: 0 8px 25px rgba(73,80,87,0.15);
             transition: all 0.3s ease;
-            /* Flexbox inside each card for content alignment */
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* HOVER EFFECTS for cards */
         .feature-card:hover {
-            transform: translateY(-10px) scale(1.02); /* Lift and slight scale effect */
-            box-shadow: 0 15px 35px rgba(73,80,87,0.25); /* Enhanced shadow */
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(73,80,87,0.25);
         }
 
         .feature-card img {
