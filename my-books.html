@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Books - PageTurner Books</title>
+    <link rel="stylesheet" href="styles/my-books.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">PageTurner Books</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="catalog.html">Catalog</a></li>
+                    <li><a href="my-books.html" class="active">My Books</a></li>
+                    <li><a href="review.html">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1>My Library</h1>
+            <p>Your personal collection of digital and physical books</p>
+        </div>
+
+        <div class="library-stats">
+            <div class="stat-card">
+                <span class="stat-number">12</span>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">8</span>
+                <div class="stat-label">E-books</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">4</span>
+                <div class="stat-label">Physical Books</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">3</span>
+                <div class="stat-label">Currently Reading</div>
+            </div>
+        </div>
+
+        <div class="library-tabs">
+            <button class="tab-btn active">All Books</button>
+            <button class="tab-btn">Currently Reading</button>
+            <button class="tab-btn">Completed</button>
+            <button class="tab-btn">Wishlist</button>
+        </div>
+
+        <div class="my-books-grid">
+            <div class="my-book-card">
+                <div class="book-thumbnail">🔍</div>
+                <div class="book-details">
+                    <div class="book-title">Murder on the Orient Express</div>
+                    <div class="book-author">by Agatha Christie</div>
+                    <span class="book-format ebook">E-book</span>
+                    <div class="reading-progress">
+                        <div class="progress-label">Progress: 65%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="book-actions">
+                        <button class="action-btn read-btn">Continue Reading</button>
+                        <button class="action-btn download-btn">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-book-card">
+                <div class="book-thumbnail">📚</div>
+                <div class="book-details">
+                    <div class="book-title">The Silent Patient</div>
+                    <div class="book-author">by Alex Michaelides</div>
+                    <span class="book-format">Physical Book</span>
+                    <div class="reading-progress">
+                        <div class="progress-label">Progress: 100% - Completed</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="book-actions">
+                        <button class="action-btn read-btn">Leave Review</button>
+                        <button class="action-btn remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-book-card">
+                <div class="book-thumbnail">🌟</div>
+                <div class="book-details">
+                    <div class="book-title">Atomic Habits</div>
+                    <div class="book-author">by James Clear</div>
+                    <span class="book-format ebook">E-book</span>
+                    <div class="reading-progress">
+                        <div class="progress-label">Progress: 42%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="book-actions">
+                        <button class="action-btn read-btn">Continue Reading</button>
+                        <button class="action-btn download-btn">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-book-card">
+                <div class="book-thumbnail">🏰</div>
+                <div class="book-details">
+                    <div class="book-title">The Seven Husbands of Evelyn Hugo</div>
+                    <div class="book-author">by Taylor Jenkins Reid</div>
+                    <span class="book-format">Physical Book</span>
+                    <div class="reading-progress">
+                        <div class="progress-label">Progress: 18%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 18%"></div>
+                        </div>
+                    </div>
+                    <div class="book-actions">
+                        <button class="action-btn read-btn">Continue Reading</button>
+                        <button class="action-btn remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-book-card">
+                <div class="book-thumbnail">🚀</div>
+                <div class="book-details">
+                    <div class="book-title">Project Hail Mary</div>
+                    <div class="book-author">by Andy Weir</div>
+                    <span class="book-format ebook">E-book</span>
+                    <div class="reading-progress">
+                        <div class="progress-label">Progress: 0% - Not Started</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="book-actions">
+                        <button class="action-btn read-btn">Start Reading</button>
+                        <button class="action-btn download-btn">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-book-card">
+                <div class="book-thumbnail">💔</div>
+                <div class="book-details">
+                    <div class="book-title">It Ends with Us</div>
+                    <div class="book-author">by Colleen Hoover</div>
+                    <span class="book-format">Physical Book</span>
+                    <div class="reading-progress">
+                        <div class="progress-label">Progress: 100% - Completed</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="book-actions">
+                        <button class="action-btn read-btn">Leave Review</button>
+                        <button class="action-btn remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="catalog.html" class="browse-btn">Browse More Books</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="catalog.html">Catalog</a></li>
+                        <li><a href="my-books.html">My Books</a></li>
+                        <li><a href="review.html">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Fiction</a></li>
+                        <li><a href="#">Mystery & Thriller</a></li>
+                        <li><a href="#">Self-Help</a></li>
+                        <li><a href="#">Biography</a></li>
+                        <li><a href="#">Science Fiction</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#">Newsletter Signup</a></li>
+                        <li><a href="#">Book Club</a></li>
+                        <li><a href="#">Author Events</a></li>
+                        <li><a href="#">Reading Blog</a></li>
+                        <li><a href="#">Social Media</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PageTurner Books. All rights reserved. | Privacy Policy | Terms of Service | Accessibility</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

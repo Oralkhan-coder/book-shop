@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageTurner Books - Your Digital & Physical Bookstore</title>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo on the left -->
+            <div class="logo">PageTurner Books</div>
+            <!-- Navigation links on the right -->
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="catalog.html">Catalog</a></li>
+                    <li><a href="my-books.html">My Books</a></li>
+                    <li><a href="review.html">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- TASK 3: PAGE LAYOUT WITH GRID AREAS -->
+    <div class="page-layout">
+        <!-- Sidebar on the left -->
+        <aside class="sidebar">
+            <h3>Quick Navigation</h3>x`
+            <ul>
+                <li><a href="#features" class="active">Features</a></li>
+                <li><a href="#bestsellers">Bestsellers</a></li>
+                <li><a href="#gallery">Book Gallery</a></li>
+                <li><a href="#new-releases">New Releases</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+            
+            <h3 style="margin-top: 2rem;">Categories</h3>
+            <ul>
+                <li><a href="#">Fiction (156)</a></li>
+                <li><a href="#">Mystery (89)</a></li>
+                <li><a href="#">Self-Help (67)</a></li>
+                <li><a href="#">Biography (45)</a></li>
+                <li><a href="#">Sci-Fi (34)</a></li>
+                <li><a href="#">Romance (78)</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main content on the right -->
+        <main class="main-content">
+            <section class="hero-section">
+                <h1>Welcome to PageTurner Books</h1>
+                <p>Your one-stop destination for digital and physical books. Discover thousands of titles across all genres.</p>
+                <div class="cta-buttons">
+                    <a href="catalog.html" class="cta-btn">Browse Catalog</a>
+                    <a href="my-books.html" class="cta-btn">My Library</a>
+                </div>
+            </section>
+
+            <!-- TASK 2: CARD ROW WITH FLEXBOX -->
+            <section id="features">
+                <h2 class="section-title">Why Choose PageTurner Books?</h2>
+                <div class="cards-container">
+                    <!-- Card 1 with image, title, text, and button -->
+                    <div class="feature-card">
+                        <div class="img" style="background: linear-gradient(135deg, #007bff, #0056b3); display: flex; align-items: center; justify-content: center; width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; font-size: 3rem; color: white;">📱</div>
+                        <h3>Digital Books</h3>
+                        <p>Instant downloads, read anywhere on any device. Perfect for the modern reader who values convenience and portability. Access your library from any device, anytime.</p>
+                        <a href="catalog.html" class="card-button">Browse E-books</a>
+                    </div>
+
+                    <!-- Card 2 with image, title, text, and button -->
+                    <div class="feature-card">
+                        <div class="img" style="background: linear-gradient(135deg, #28a745, #1e7e34); display: flex; align-items: center; justify-content: center; width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; font-size: 3rem; color: white;">📖</div>
+                        <h3>Physical Books</h3>
+                        <p>Traditional hardcovers and paperbacks delivered to your door. Nothing beats the feel of real pages and that authentic book experience. Perfect for collectors.</p>
+                        <a href="catalog.html" class="card-button">Shop Physical</a>
+                    </div>
+
+                    <!-- Card 3 with image, title, text, and button -->
+                    <div class="feature-card">
+                        <div class="img" style="background: linear-gradient(135deg, #ffc107, #e0a800); display: flex; align-items: center; justify-content: center; width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; font-size: 3rem; color: white;">🚚</div>
+                        <h3>Fast Delivery</h3>
+                        <p>Free shipping on orders over $25. Physical books delivered within 2-3 business days, e-books available instantly. Track your orders in real-time.</p>
+                        <a href="#" class="card-button">Learn More</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TASK 4: IMAGE GALLERY WITH GRID -->
+            <section id="gallery" class="gallery-section">
+                <h2 class="section-title">Featured Book Collection</h2>
+                <div class="image-gallery">
+                    <!-- 9 gallery items with hover caption overlay -->
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #8B4513, #A0522D);">📚</div>
+                        <div class="gallery-caption">
+                            <h4>Classic Literature</h4>
+                            <p>Timeless stories that have shaped literature</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #dc3545, #c82333);">🔍</div>
+                        <div class="gallery-caption">
+                            <h4>Mystery & Thriller</h4>
+                            <p>Heart-pounding suspense and intrigue</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #6f42c1, #5a30a0);">🚀</div>
+                        <div class="gallery-caption">
+                            <h4>Science Fiction</h4>
+                            <p>Explore new worlds and possibilities</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #e83e8c, #d91a72);">💕</div>
+                        <div class="gallery-caption">
+                            <h4>Romance</h4>
+                            <p>Love stories that touch the heart</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #17a2b8, #138496);">⚔️</div>
+                        <div class="gallery-caption">
+                            <h4>Fantasy & Adventure</h4>
+                            <p>Epic quests and magical realms</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #28a745, #1e7e34);">🌟</div>
+                        <div class="gallery-caption">
+                            <h4>Self-Help</h4>
+                            <p>Transform your life and mindset</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #fd7e14, #e8650e);">📈</div>
+                        <div class="gallery-caption">
+                            <h4>Business & Finance</h4>
+                            <p>Strategies for success and growth</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #6c757d, #5a6268);">🎓</div>
+                        <div class="gallery-caption">
+                            <h4>Biography</h4>
+                            <p>Inspiring life stories and achievements</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div style="background: linear-gradient(135deg, #20c997, #1aa085);">🔬</div>
+                        <div class="gallery-caption">
+                            <h4>Science & Technology</h4>
+                            <p>Discover the wonders of our world</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="bestsellers">
+                <h2 class="section-title">Bestsellers This Month</h2>
+                <div class="bestsellers-grid">
+                    <div class="book-card">
+                        <div class="book-cover">📚</div>
+                        <h4>The Silent Patient</h4>
+                        <p>by Alex Michaelides</p>
+                        <div class="book-price">
+                            <span class="price-tag">E-book: $9.99</span>
+                            <span class="price-tag">Print: $14.99</span>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">🔍</div>
+                        <h4>Murder on the Orient Express</h4>
+                        <p>by Agatha Christie</p>
+                        <div class="book-price">
+                            <span class="price-tag">E-book: $7.99</span>
+                            <span class="price-tag">Print: $12.99</span>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">🌟</div>
+                        <h4>Atomic Habits</h4>
+                        <p>by James Clear</p>
+                        <div class="book-price">
+                            <span class="price-tag">E-book: $11.99</span>
+                            <span class="price-tag">Print: $16.99</span>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-cover">🏰</div>
+                        <h4>The Seven Husbands of Evelyn Hugo</h4>
+                        <p>by Taylor Jenkins Reid</p>
+                        <div class="book-price">
+                            <span class="price-tag">E-book: $8.99</span>
+                            <span class="price-tag">Print: $13.99</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="catalog.html">Catalog</a></li>
+                        <li><a href="my-books.html">My Books</a></li>
+                        <li><a href="review.html">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Fiction</a></li>
+                        <li><a href="#">Mystery & Thriller</a></li>
+                        <li><a href="#">Self-Help</a></li>
+                        <li><a href="#">Biography</a></li>
+                        <li><a href="#">Science Fiction</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#">Newsletter Signup</a></li>
+                        <li><a href="#">Book Club</a></li>
+                        <li><a href="#">Author Events</a></li>
+                        <li><a href="#">Reading Blog</a></li>
+                        <li><a href="#">Social Media</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PageTurner Books. All rights reserved. | Privacy Policy | Terms of Service | Accessibility</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
