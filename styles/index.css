@@ -416,39 +416,3 @@
             border-top: 1px solid #495057;
             color: #adb5bd;
         }
-
-        @media (max-width: 768px) {
-            .page-layout {
-                grid-template-areas: 
-                    "sidebar"
-                    "main-content"
-                    "footer";
-                grid-template-columns: 1fr;
-            }
-
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .cards-container {
-                flex-direction: column;
-            }
-
-            .image-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
