@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalog - PageTurner Books</title>
     <link rel="stylesheet" href="styles/catalog.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="scripts/query.js"></script>
 </head>
 
 <body>
+    <div id="notification-container"></div>
+
     <header>
         <div class="header-container">
             <div class="logo">PageTurner Books</div>
@@ -32,7 +36,8 @@
 
         <div class="search-filter-section">
             <div class="search-box">
-                <input type="text" placeholder="Search books, authors, or genres...">
+                <input type="text" id="book-search" placeholder="Search books, authors, or genres...">
+                <div id="autocomplete-list" class="autocomplete-suggestions"></div>
             </div>
             <div class="filter-buttons">
                 <button class="filter-btn active">All Books</button>
@@ -43,7 +48,7 @@
         </div>
 
         <div class="results-info">
-            <p>Showing 124 books in all categories</p>
+            <p id="results-count">Showing 6 books</p>
         </div>
 
         <div class="catalog-layout">
@@ -69,8 +74,8 @@
             </aside>
 
             <div class="books-container">
-                <div class="book-item">
-                    <img class="book-cover" src="images/murder.webp" alt="">
+                <div class="book-item" data-title="Murder on the Orient Express" data-author="Agatha Christie" data-genre="Mystery">
+                    <img class="book-cover lazy-load" data-src="images/murder.webp" alt="Murder on the Orient Express">
                     <div class="book-info">
                         <h3>Murder on the Orient Express</h3>
                         <p class="book-author">by Agatha Christie</p>
@@ -90,8 +95,8 @@
                     </div>
                 </div>
 
-                <div class="book-item">
-                    <img class="book-cover" src="images/silent-patient.jpg" alt="">
+                <div class="book-item" data-title="The Silent Patient" data-author="Alex Michaelides" data-genre="Thriller">
+                    <img class="book-cover lazy-load" data-src="images/silent-patient.jpg" alt="The Silent Patient">
                     <div class="book-info">
                         <h3>The Silent Patient</h3>
                         <p class="book-author">by Alex Michaelides</p>
@@ -111,8 +116,8 @@
                     </div>
                 </div>
 
-                <div class="book-item">
-                    <img class="book-cover" src="images/atomic.jpg" alt="">
+                <div class="book-item" data-title="Atomic Habits" data-author="James Clear" data-genre="Self-Help">
+                    <img class="book-cover lazy-load" data-src="images/atomic.jpg" alt="Atomic Habits">
                     <div class="book-info">
                         <h3>Atomic Habits</h3>
                         <p class="book-author">by James Clear</p>
@@ -132,8 +137,8 @@
                     </div>
                 </div>
 
-                <div class="book-item">
-                    <img class="book-cover" src="images/seven-husband.jpg" alt="">
+                <div class="book-item" data-title="The Seven Husbands of Evelyn Hugo" data-author="Taylor Jenkins Reid" data-genre="Fiction">
+                    <img class="book-cover lazy-load" data-src="images/seven-husband.jpg" alt="The Seven Husbands of Evelyn Hugo">
                     <div class="book-info">
                         <h3>The Seven Husbands of Evelyn Hugo</h3>
                         <p class="book-author">by Taylor Jenkins Reid</p>
@@ -153,8 +158,8 @@
                     </div>
                 </div>
 
-                <div class="book-item">
-                    <img class="book-cover" src="images/andy-weir.jpg" alt="">
+                <div class="book-item" data-title="Project Hail Mary" data-author="Andy Weir" data-genre="Science Fiction">
+                    <img class="book-cover lazy-load" data-src="images/andy-weir.jpg" alt="Project Hail Mary">
                     <div class="book-info">
                         <h3>Project Hail Mary</h3>
                         <p class="book-author">by Andy Weir</p>
@@ -174,8 +179,8 @@
                     </div>
                 </div>
 
-                <div class="book-item">
-                    <img class="book-cover" src="images/ends-with-us.jpg" alt="">
+                <div class="book-item" data-title="It Ends with Us" data-author="Colleen Hoover" data-genre="Romance">
+                    <img class="book-cover lazy-load" data-src="images/ends-with-us.jpg" alt="It Ends with Us">
                     <div class="book-info">
                         <h3>It Ends with Us</h3>
                         <p class="book-author">by Colleen Hoover</p>

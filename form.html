@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact & Subscribe - PageTurner Books</title>
     <link rel="stylesheet" href="styles/form.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="scripts/query.js"></script>
 </head>
 
 <body>
@@ -72,13 +74,22 @@
                     <span class="error-message" id="message-error"></span>
                 </div>
 
-                <button type="submit" class="submit-btn">Send Message</button>
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span class="btn-text">Send Message</span>
+                    <span class="btn-spinner" style="display: none;">
+                        <span class="spinner"></span> Please wait...
+                    </span>
+                </button>
             </form>
             <div id="success-message" class="success-message">Thank you! Your message has been sent successfully.</div>
         </div>
 
         <div class="faq-container">
             <h2>Frequently Asked Questions</h2>
+            <div class="faq-search-box">
+                <input type="text" id="faq-search" placeholder="Search FAQs...">
+                <button id="clear-highlight" style="display: none;">Clear Highlight</button>
+            </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
@@ -89,6 +100,9 @@
                     <p>Browse our catalog, select your desired book format (e-book, paperback, or hardcover), add it to
                         your cart, and proceed to checkout. We accept all major credit cards and PayPal for secure
                         payment processing.</p>
+                    <button class="copy-btn" data-copy="Browse our catalog, select your desired book format (e-book, paperback, or hardcover), add it to your cart, and proceed to checkout. We accept all major credit cards and PayPal for secure payment processing.">
+                        <span class="copy-icon">📋</span> Copy
+                    </button>
                 </div>
             </div>
 
@@ -101,6 +115,9 @@
                     <p>We offer a 30-day return policy for physical books in new condition. E-books are non-refundable
                         once downloaded. If you receive a damaged or defective item, please contact us within 7 days for
                         a full refund or replacement.</p>
+                    <button class="copy-btn" data-copy="We offer a 30-day return policy for physical books in new condition. E-books are non-refundable once downloaded. If you receive a damaged or defective item, please contact us within 7 days for a full refund or replacement.">
+                        <span class="copy-icon">📋</span> Copy
+                    </button>
                 </div>
             </div>
 
@@ -113,6 +130,9 @@
                     <p>Standard shipping takes 5-7 business days. Express shipping (2-3 business days) is available for
                         an additional fee. E-books are delivered instantly upon purchase confirmation. International
                         shipping times vary by location.</p>
+                    <button class="copy-btn" data-copy="Standard shipping takes 5-7 business days. Express shipping (2-3 business days) is available for an additional fee. E-books are delivered instantly upon purchase confirmation. International shipping times vary by location.">
+                        <span class="copy-icon">📋</span> Copy
+                    </button>
                 </div>
             </div>
 
@@ -241,8 +261,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="scripts/script.js"></script>
 </body>
 
+<script src="scripts/script.js"></script>
 </html>

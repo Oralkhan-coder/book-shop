@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Books - PageTurner Books</title>
     <link rel="stylesheet" href="styles/my-books.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="scripts/query.js"></script>
 </head>
 <body>
     <header>
@@ -30,19 +32,19 @@
 
         <div class="library-stats">
             <div class="stat-card">
-                <span class="stat-number">12</span>
+                <span class="stat-number" data-target="12">0</span>
                 <div class="stat-label">Total Books</div>
             </div>
             <div class="stat-card">
-                <span class="stat-number">8</span>
+                <span class="stat-number" data-target="8">0</span>
                 <div class="stat-label">E-books</div>
             </div>
             <div class="stat-card">
-                <span class="stat-number">4</span>
+                <span class="stat-number" data-target="4">0</span>
                 <div class="stat-label">Physical Books</div>
             </div>
             <div class="stat-card">
-                <span class="stat-number">3</span>
+                <span class="stat-number" data-target="3">0</span>
                 <div class="stat-label">Currently Reading</div>
             </div>
         </div>
