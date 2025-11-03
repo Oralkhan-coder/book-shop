@@ -385,3 +385,90 @@ footer {
     border-top: 1px solid #495057;
     color: #adb5bd;
 }
+
+@media (max-width: 992px) {
+    .header-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 1.25rem;
+    }
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    .book-review-container {
+        padding: 2rem 1.25rem;
+    }
+    .book-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .book-info {
+        width: 100%;
+    }
+    .book-title {
+        font-size: 2rem;
+    }
+    .book-cover-large {
+        width: 160px;
+        height: 240px;
+    }
+    .price-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    .reviews-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.6rem;
+    }
+    nav a {
+        font-size: 1rem;
+        padding: 0.4rem 0.75rem;
+    }
+}
+
+footer {
+    background: transparent;
+    color: #6c757d;
+    padding: 1.5rem 0 1rem;
+    border-top: 1px solid #dee2e6;
+    margin-top: 2rem;
+}
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.footer-section h3 { display: none; }
+.footer-section ul {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+}
+.footer-section li { margin: 0; list-style: none; }
+.footer-section a { color: #6c757d; text-decoration: none; }
+.footer-section a:hover { color: #343a40; }
+.footer-bottom {
+    border-top: none;
+    padding-top: 0.25rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
