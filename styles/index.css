@@ -1,3 +1,35 @@
+:root {
+    /* Light Mode Colors */
+    --bg-primary: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --bg-secondary: rgba(255, 255, 255, 0.95);
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --text-light: #f8f9fa;
+    --border-color: #dee2e6;
+    --header-bg: linear-gradient(135deg, #495057, #343a40);
+    --sidebar-bg: rgba(255, 255, 255, 0.95);
+    --hero-bg: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    --shadow-color: rgba(73, 80, 87, 0.15);
+    --shadow-hover: rgba(73, 80, 87, 0.25);
+}
+
+[data-theme="dark"] {
+    /* Dark Mode Colors */
+    --bg-primary: linear-gradient(135deg, #1a1d21 0%, #2c3138 100%);
+    --bg-secondary: rgba(40, 44, 52, 0.95);
+    --bg-card: rgba(45, 49, 58, 0.95);
+    --text-primary: #f8f9fa;
+    --text-secondary: #ced4da;
+    --text-light: #f8f9fa;
+    --border-color: #495057;
+    --header-bg: linear-gradient(135deg, #212529, #343a40);
+    --sidebar-bg: rgba(40, 44, 52, 0.95);
+    --hero-bg: linear-gradient(135deg, #495057 0%, #343a40 100%);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.5);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,9 +39,10 @@
 body {
     font-family: 'Georgia', serif;
     line-height: 1.6;
-    color: #2c3e50;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: var(--text-primary);
+    background: var(--bg-primary);
     min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 #scroll-progress {
@@ -49,9 +82,9 @@ body {
 }
 
 .header {
-    background: linear-gradient(135deg, #495057, #343a40);
+    background: var(--header-bg);
     padding: 1rem 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px var(--shadow-color);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -69,7 +102,7 @@ body {
 .logo {
     font-size: 2rem;
     font-weight: bold;
-    color: #f8f9fa;
+    color: var(--text-light);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -88,7 +121,7 @@ body {
 }
 
 .nav-links a {
-    color: #f8f9fa;
+    color: var(--text-light);
     text-decoration: none;
     font-size: 1.1rem;
     transition: all 0.3s ease;
@@ -119,15 +152,15 @@ body {
 
 .sidebar {
     grid-area: sidebar;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--sidebar-bg);
     padding: 2rem;
     border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(73, 80, 87, 0.15);
+    box-shadow: 0 8px 25px var(--shadow-color);
     height: fit-content;
 }
 
 .sidebar h3 {
-    color: #343a40;
+    color: var(--text-primary);
     margin-bottom: 1rem;
     font-size: 1.3rem;
 }
@@ -141,7 +174,7 @@ body {
 }
 
 .sidebar a {
-    color: #6c757d;
+    color: var(--text-secondary);
     text-decoration: none;
     padding: 0.6rem;
     display: block;
@@ -152,7 +185,7 @@ body {
 .sidebar a:hover,
 .sidebar a.active {
     background: rgba(108, 117, 125, 0.1);
-    color: #343a40;
+    color: var(--text-primary);
     transform: translateX(5px);
 }
 
@@ -160,13 +193,13 @@ body {
     grid-area: main-content;
 }
 .hero-section {
-    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    background: var(--hero-bg);
     color: white;
     padding: 4rem 2rem;
     border-radius: 20px;
     text-align: center;
     margin-bottom: 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px var(--shadow-color);
 }
 
 .hero-section h1 {
@@ -210,7 +243,7 @@ body {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: #343a40;
+    color: var(--text-primary);
 }
 
 .cards-container {
@@ -224,11 +257,11 @@ body {
 .feature-card {
     flex: 1;
     min-width: 280px;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-card);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(73, 80, 87, 0.15);
+    box-shadow: 0 8px 25px var(--shadow-color);
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -237,7 +270,7 @@ body {
 
 .feature-card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(73, 80, 87, 0.25);
+    box-shadow: 0 15px 35px var(--shadow-hover);
 }
 
 .feature-card img {
@@ -257,11 +290,11 @@ body {
 .feature-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #343a40;
+    color: var(--text-primary);
 }
 
 .feature-card p {
-    color: #6c757d;
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
     flex-grow: 1;
 }
@@ -348,17 +381,17 @@ body {
 }
 
 .book-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-card);
     border-radius: 15px;
     padding: 1.5rem;
     text-align: center;
-    box-shadow: 0 6px 20px rgba(73, 80, 87, 0.1);
+    box-shadow: 0 6px 20px var(--shadow-color);
     transition: all 0.3s ease;
 }
 
 .book-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(73, 80, 87, 0.2);
+    box-shadow: 0 12px 30px var(--shadow-hover);
 }
 
 .book-cover {
@@ -377,11 +410,11 @@ body {
 .book-card h4 {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
-    color: #343a40;
+    color: var(--text-primary);
 }
 
 .book-card p {
-    color: #6c757d;
+    color: var(--text-secondary);
     margin-bottom: 1rem;
 }
 
@@ -402,7 +435,7 @@ body {
 
 .footer {
     grid-area: footer;
-    background: linear-gradient(135deg, #343a40, #495057);
+    background: var(--header-bg);
     color: white;
     padding: 3rem 2rem 1rem;
     border-radius: 15px;
@@ -431,18 +464,44 @@ body {
 }
 
 .footer-section a {
-    color: #ced4da;
+    color: #f8f9fa;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
-    color: #adb5bd;
+    color: #ffffff;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
     border-top: 1px solid #495057;
-    color: #adb5bd;
+    color: #f8f9fa;
+}
+
+/* Dark Mode Toggle Button */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--header-bg);
+    color: var(--text-light);
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px var(--shadow-hover);
 }
