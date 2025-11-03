@@ -446,3 +446,114 @@ body {
     border-top: 1px solid #495057;
     color: #adb5bd;
 }
+
+@media (max-width: 992px) {
+    .header-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem 1rem;
+    }
+    .hero-section h1 {
+        font-size: 2.4rem;
+    }
+    .hero-section p {
+        font-size: 1.1rem;
+    }
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 180px);
+    }
+}
+
+@media (max-width: 768px) {
+    .page-layout {
+        grid-template-areas:
+            "main-content"
+            "sidebar"
+            "footer";
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    .sidebar {
+        padding: 1.25rem;
+    }
+    .hero-section {
+        padding: 2.5rem 1.25rem;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .feature-card img {
+        height: 160px;
+    }
+    .image-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(9, 180px);
+        gap: 1rem;
+    }
+    .book-cover {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.6rem;
+    }
+    .nav-links a {
+        font-size: 1rem;
+        padding: 0.4rem 0.75rem;
+    }
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    .cards-container {
+        gap: 1rem;
+    }
+    .feature-card {
+        padding: 1.25rem;
+    }
+}
+
+.footer {
+    background: transparent;
+    color: #6c757d;
+    padding: 1.5rem 0 1rem;
+    border-top: 1px solid #dee2e6;
+    border-radius: 0;
+    margin-top: 2rem;
+}
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0.5rem;
+}
+.footer-section h3 {
+    display: none;
+}
+.footer-section ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+}
+.footer-section li { margin: 0; }
+.footer-section a {
+    color: #6c757d;
+    text-decoration: none;
+}
+.footer-section a:hover { color: #343a40; }
+.footer-bottom {
+    border-top: none;
+    padding-top: 0.25rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
