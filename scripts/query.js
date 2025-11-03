@@ -1,6 +1,10 @@
 $(document).ready(function () {
     console.log("jQuery is ready!");
 
+    if (!$('#notification-container').length) {
+        $('body').append('<div id="notification-container" style="position:fixed;top:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:10px;"></div>');
+    }
+
     $('#book-search').on('keyup', function () {
         const searchTerm = $(this).val().toLowerCase();
         let visibleCount = 0;
@@ -19,7 +23,6 @@ $(document).ready(function () {
         $('#results-count').text(`Showing ${visibleCount} book${visibleCount !== 1 ? 's' : ''}`);
     });
 
-    // TASK 2
     const bookData = [];
     $('.book-item').each(function () {
         const title = $(this).data('title');
@@ -62,7 +65,6 @@ $(document).ready(function () {
         }
     });
 
-    // TASK 3
     $('#faq-search').on('keyup', function () {
         const searchTerm = $(this).val().trim();
 
@@ -103,7 +105,6 @@ $(document).ready(function () {
         $('#faq-search').val('').trigger('keyup');
     });
 
-    // TASK 4
     $(window).on('scroll', function () {
         const windowHeight = $(window).height();
         const documentHeight = $(document).height();
@@ -114,7 +115,6 @@ $(document).ready(function () {
         $('#scroll-progress-bar').css('width', scrollPercentage + '%');
     });
 
-    // TASK 5
     function animateCounter($element) {
         const target = parseInt($element.data('target'));
         const duration = 2000;
@@ -164,9 +164,17 @@ $(document).ready(function () {
         }
     }
 
-    // TASK 6
     $('#contact-form').on('submit', function (e) {
         e.preventDefault();
+        const form = this;
+
+        $(form).find('input, textarea').trigger('blur');
+
+        const hasErrors = $(form).find('.error').length > 0;
+        if (hasErrors) {
+            showNotification('Please correct the highlighted fields.', 'error');
+            return;
+        }
 
         const $submitBtn = $('#submit-btn');
         const $btnText = $submitBtn.find('.btn-text');
@@ -182,15 +190,14 @@ $(document).ready(function () {
             $btnSpinner.hide();
 
             $('#success-message').addClass('show');
-            $('#contact-form')[0].reset();
+            form.reset();
 
             setTimeout(function () {
                 $('#success-message').removeClass('show');
             }, 5000);
-        }, 3000);
+        }, 1200);
     });
 
-    // TASK 7
     function showNotification(message, type = 'success') {
         const $notification = $('<div>')
             .addClass('notification')
@@ -218,7 +225,199 @@ $(document).ready(function () {
         showNotification(`"${bookTitle}" added to cart!`, 'success');
     });
 
-    // TASK 8
+    $('.category-list a').on('click', function (e) {
+        e.preventDefault();
+        const $link = $(this);
+        $('.category-list a').removeClass('active');
+        $link.addClass('active');
+
+        const raw = $link.text().trim();
+        const category = raw.replace(/\s*\(.*\)$/, ''); // strip counts
+
+        const $items = $('.book-item');
+        if (category.toLowerCase() === 'all categories') {
+            $items.show();
+        } else {
+            $items.each(function () {
+                const genre = ($(this).data('genre') || '').toString().toLowerCase();
+                $(this).toggle(genre.includes(category.toLowerCase()));
+            });
+        }
+
+        const visible = $('.book-item:visible').length;
+        $('#results-count').text(`Showing ${visible} book${visible !== 1 ? 's' : ''}`);
+    });
+
+    $('.filter-btn').on('click', function () {
+        const $btn = $(this);
+        $('.filter-btn').removeClass('active');
+        $btn.addClass('active');
+
+        const label = $btn.text().trim();
+        const $items = $('.book-item');
+
+        if (label === 'All Books') {
+            $items.show();
+        } else if (label === 'E-books') {
+            $items.each(function () {
+                const hasEbook = $(this).find('.ebook-price').length > 0;
+                $(this).toggle(hasEbook);
+            });
+        } else if (label === 'Physical Books') {
+            $items.each(function () {
+                const hasEbook = $(this).find('.ebook-price').length > 0;
+                $(this).toggle(!hasEbook);
+            });
+        } else if (label === 'Bestsellers') {
+            $items.each(function () {
+                const ratingText = $(this).find('.rating span').last().text();
+                const rating = parseFloat(ratingText) || 0;
+                $(this).toggle(rating >= 4.8);
+            });
+        }
+
+        const visible = $('.book-item:visible').length;
+        $('#results-count').text(`Showing ${visible} book${visible !== 1 ? 's' : ''}`);
+    });
+
+    $('.library-tabs .tab-btn').on('click', function () {
+        const $btn = $(this);
+        $('.library-tabs .tab-btn').removeClass('active');
+        $btn.addClass('active');
+
+        const view = $btn.text().trim();
+        const $cards = $('.my-book-card');
+
+        if (view === 'All Books') {
+            $cards.show();
+            return;
+        }
+
+        $cards.each(function () {
+            const $card = $(this);
+            const progressText = $card.find('.progress-label').text();
+            const isEbook = $card.find('.book-format').hasClass('ebook');
+            const progressMatch = progressText.match(/(\d+)%/);
+            const progress = progressMatch ? parseInt(progressMatch[1], 10) : 0;
+
+            let show = false;
+            if (view === 'Currently Reading') show = progress > 0 && progress < 100;
+            if (view === 'Completed') show = progress === 100;
+            if (view === 'Wishlist') show = false; // no wishlist items yet
+            $card.toggle(show);
+        });
+    });
+
+    $('.my-books-grid').on('click', '.read-btn', function () {
+        const $card = $(this).closest('.my-book-card');
+        const title = $card.find('.book-title').text();
+        if ($(this).text().toLowerCase().includes('leave review')) {
+            window.location.href = 'review.html';
+        } else if ($(this).text().toLowerCase().includes('start') || $(this).text().toLowerCase().includes('continue')) {
+            showNotification(`Opening "${title}"...`, 'success');
+        }
+    });
+
+    $('.my-books-grid').on('click', '.download-btn', function () {
+        const $card = $(this).closest('.my-book-card');
+        const title = $card.find('.book-title').text();
+        const author = $card.find('.book-author').text();
+        const blob = new Blob([`${title}\n${author}\nDownloaded from PageTurner`], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${title.replace(/[^a-z0-9-_]+/gi, '_')}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showNotification(`Downloading "${title}"`, 'success');
+    });
+
+    $('.my-books-grid').on('click', '.remove-btn', function () {
+        const $card = $(this).closest('.my-book-card');
+        const title = $card.find('.book-title').text();
+        if (confirm(`Remove "${title}" from your library?`)) {
+            $card.slideUp(200, function () { $(this).remove(); });
+            showNotification(`Removed "${title}" from your library.`, 'success');
+        }
+    });
+
+    (function () {
+        const $categoriesHeader = $('.page-layout .sidebar h3').filter(function(){ return $(this).text().trim().toLowerCase() === 'categories'; }).first();
+        if ($categoriesHeader.length) {
+            const $catList = $categoriesHeader.next('ul');
+            const $gallery = $('#gallery');
+            if ($catList.length && $gallery.length) {
+                $catList.find('a').on('click', function (e) {
+                    e.preventDefault();
+                    const $section = $('.gallery-section');
+                    $('html, body').animate({ scrollTop: $gallery.offset().top - 80 }, 300);
+                    $section.stop(true).css('box-shadow', '0 0 0 3px rgba(108,117,125,0.3)');
+                    setTimeout(function(){ $section.css('box-shadow', 'none'); }, 800);
+                });
+            }
+        }
+    })();
+
+    $('.write-review-btn').on('click', function () {
+        const $overlay = $('<div class="popup-overlay show"></div>').css({ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 2000, display: 'flex', justifyContent: 'center', alignItems: 'center' });
+        const $modal = $('<div class="popup-container"></div>').css({ background: '#fff', borderRadius: '16px', padding: '1.5rem', width: '90%', maxWidth: '520px', position: 'relative' });
+        const $close = $('<button aria-label="Close" />').text('×').css({ position: 'absolute', top: '10px', right: '12px', background: 'none', border: 'none', fontSize: '28px', cursor: 'pointer', color: '#6c757d' });
+        const $form = $('<form></form>').append(
+            '<h3 style="margin-bottom:10px;color:#343a40;">Write a Review</h3>' +
+            '<label style="display:block;margin:8px 0 4px;color:#495057;">Your Name *</label>' +
+            '<input required type="text" style="width:100%;padding:10px;border:1px solid #dee2e6;border-radius:8px;">' +
+            '<label style="display:block;margin:12px 0 4px;color:#495057;">Rating (1-5) *</label>' +
+            '<input required type="number" min="1" max="5" style="width:100%;padding:10px;border:1px solid #dee2e6;border-radius:8px;">' +
+            '<label style="display:block;margin:12px 0 4px;color:#495057;">Review *</label>' +
+            '<textarea required rows="4" style="width:100%;padding:10px;border:1px solid #dee2e6;border-radius:8px;"></textarea>' +
+            '<button type="submit" style="margin-top:12px;padding:10px 16px;border:none;border-radius:20px;background:#6c757d;color:#fff;cursor:pointer;">Submit</button>'
+        );
+        $modal.append($close, $form);
+        $overlay.append($modal);
+        $('body').append($overlay);
+
+        $close.on('click', function () { $overlay.remove(); });
+        $overlay.on('click', function (e) { if (e.target === $overlay[0]) $overlay.remove(); });
+        $(document).on('keydown.reviewModal', function (e) { if (e.key === 'Escape') { $overlay.remove(); $(document).off('keydown.reviewModal'); } });
+
+        $form.on('submit', function (e) {
+            e.preventDefault();
+            const name = $(this).find('input[type="text"]').val().trim();
+            const rating = parseInt($(this).find('input[type="number"]').val(), 10);
+            const text = $(this).find('textarea').val().trim();
+            if (!name || !text || !(rating >= 1 && rating <= 5)) {
+                showNotification('Please complete all fields correctly.', 'error');
+                return;
+            }
+
+            const $new = $(
+                '<div class="review-item">\
+                    <div class="review-header">\
+                        <div class="reviewer-info">\
+                            <div class="reviewer-avatar">' + name.slice(0,2).toUpperCase() + '</div>\
+                            <div>\
+                                <div class="reviewer-name">' + name + '</div>\
+                                <div class="review-date">' + new Date().toLocaleDateString() + '</div>\
+                            </div>\
+                        </div>\
+                        <div class="review-rating">' + '⭐'.repeat(rating) + '</div>\
+                    </div>\
+                    <div class="review-text">' + text + '</div>\
+                    <div class="review-helpful">\
+                        <span>Was this helpful?</span>\
+                        <button class="helpful-btn">👍 Yes (0)</button>\
+                        <button class="helpful-btn">👎 No (0)</button>\
+                    </div>\
+                </div>'
+            );
+            $('.reviews-section').append($new);
+            $overlay.remove();
+            showNotification('Review submitted. Thank you!', 'success');
+        });
+    });
+
     $('.copy-btn').on('click', function () {
         const $btn = $(this);
         const textToCopy = $btn.data('copy');
@@ -252,7 +451,6 @@ $(document).ready(function () {
         $temp.remove();
     });
 
-    // TASK 9
     function lazyLoadImages() {
         $('.lazy-load').each(function () {
             const $img = $(this);

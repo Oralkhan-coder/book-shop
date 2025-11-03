@@ -712,7 +712,6 @@ footer {
     }
 }
 
-/* Dark Mode Toggle Button */
 .theme-toggle {
     position: fixed;
     bottom: 20px;
@@ -736,4 +735,36 @@ footer {
 .theme-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 20px var(--shadow-hover);
+
+
+footer {
+    background: transparent;
+    color: #6c757d;
+    padding: 1.5rem 0 1rem;
+    border-top: 1px solid #dee2e6;
+    margin-top: 2rem;
+}
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+  
+.footer-section h3 { display: none; }
+.footer-section ul {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+}
+  
+.footer-section li { margin: 0; list-style: none; }
+.footer-section a { color: #6c757d; text-decoration: none; }
+.footer-section a:hover { color: #343a40; }
+.footer-bottom {
+    border-top: none;
+    padding-top: 0.25rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+
 }
