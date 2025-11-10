@@ -5,6 +5,33 @@ $(document).ready(function () {
         $('body').append('<div id="notification-container" style="position:fixed;top:20px;right:20px;z-index:10000;display:flex;flex-direction:column;gap:10px;"></div>');
     }
 
+    function saveSearchState() {
+        const term = $('#book-search').val() || '';
+        const activeFilter = $('.filter-btn.active').text() || 'All Books';
+        const activeCategory = $('.category-list a.active').text() || 'All Categories';
+        const visibleTitles = $('.book-item:visible').map(function(){ return $(this).data('title'); }).get();
+        const state = { term, activeFilter, activeCategory, visibleTitles };
+        localStorage.setItem('searchState', JSON.stringify(state));
+    }
+
+    function restoreSearchState() {
+        const raw = localStorage.getItem('searchState');
+        if (!raw) return;
+        try {
+            const state = JSON.parse(raw);
+            if (state.term) {
+                $('#book-search').val(state.term);
+                $('#book-search').trigger('keyup');
+            }
+            if (state.activeFilter) {
+                $('.filter-btn').removeClass('active').filter(function(){ return $(this).text().trim() === state.activeFilter.trim(); }).addClass('active').trigger('click');
+            }
+            if (state.activeCategory) {
+                $('.category-list a').removeClass('active').filter(function(){ return $(this).text().replace(/\s*\(.*\)$/,'').trim() === state.activeCategory.replace(/\s*\(.*\)$/,'').trim(); }).addClass('active').trigger('click');
+            }
+        } catch (_) {}
+    }
+
     $('#book-search').on('keyup', function () {
         const searchTerm = $(this).val().toLowerCase();
         let visibleCount = 0;
@@ -21,6 +48,7 @@ $(document).ready(function () {
         });
 
         $('#results-count').text(`Showing ${visibleCount} book${visibleCount !== 1 ? 's' : ''}`);
+        saveSearchState();
     });
 
 	// Google Books search moved to scripts/google-api.js
@@ -227,39 +255,29 @@ $(document).ready(function () {
         showNotification(`"${bookTitle}" added to cart!`, 'success');
     });
 
-	$('.category-list a').on('click', function (e) {
-		e.preventDefault();
-		const $link = $(this);
-		$('.category-list a').removeClass('active');
-		$link.addClass('active');
+    $('.category-list a').on('click', function (e) {
+        e.preventDefault();
+        const $link = $(this);
+        $('.category-list a').removeClass('active');
+        $link.addClass('active');
 
-		const raw = $link.text().trim();
-		const category = raw.replace(/\s*\(.*\)$/, '');
+        const raw = $link.text().trim();
+        const category = raw.replace(/\s*\(.*\)$/, ''); // strip counts
 
-		// If Google API module is present, use it to fetch by category (subject)
-		if (window.GoogleBooks && typeof window.GoogleBooks.loadByCategory === 'function') {
-			if (category.toLowerCase() === 'all categories') {
-				window.GoogleBooks.loadBestSellers();
-			} else {
-				window.GoogleBooks.loadByCategory(category);
-			}
-			return;
-		}
+        const $items = $('.book-item');
+        if (category.toLowerCase() === 'all categories') {
+            $items.show();
+        } else {
+            $items.each(function () {
+                const genre = ($(this).data('genre') || '').toString().toLowerCase();
+                $(this).toggle(genre.includes(category.toLowerCase()));
+            });
+        }
 
-		// Fallback: local filter of existing items
-		const $items = $('.book-item');
-		if (category.toLowerCase() === 'all categories') {
-			$items.show();
-		} else {
-			$items.each(function () {
-				const genre = ($(this).data('genre') || '').toString().toLowerCase();
-				$(this).toggle(genre.includes(category.toLowerCase()));
-			});
-		}
-
-		const visible = $('.book-item:visible').length;
-		$('#results-count').text(`Showing ${visible} book${visible !== 1 ? 's' : ''}`);
-	});
+        const visible = $('.book-item:visible').length;
+        $('#results-count').text(`Showing ${visible} book${visible !== 1 ? 's' : ''}`);
+        saveSearchState();
+    });
 
     $('.filter-btn').on('click', function () {
         const $btn = $(this);
@@ -291,6 +309,7 @@ $(document).ready(function () {
 
         const visible = $('.book-item:visible').length;
         $('#results-count').text(`Showing ${visible} book${visible !== 1 ? 's' : ''}`);
+        saveSearchState();
     });
 
     $('.library-tabs .tab-btn').on('click', function () {
@@ -373,23 +392,64 @@ $(document).ready(function () {
         }
     })();
 
-	// FAQ accordion toggle (Contact page)
-	$('.faq-container').on('click', '.accordion-header', function () {
-		const $item = $(this).closest('.accordion-item');
-		$item.toggleClass('active');
-	});
+    // Reviews persistence (Reviews page)
+    const REVIEW_KEY = 'reviews:murder-orient-express';
+    function loadSavedReviews() {
+        const raw = localStorage.getItem(REVIEW_KEY);
+        if (!raw) return [];
+        try { return JSON.parse(raw) || []; } catch (_) { return []; }
+    }
+    function saveReviews(list) {
+        localStorage.setItem(REVIEW_KEY, JSON.stringify(list));
+    }
+    function appendReviewToDOM(review) {
+        const $new = $(
+            '<div class="review-item" data-review-id="' + review.id + '">\
+                <div class="review-header">\
+                    <div class="reviewer-info">\
+                        <div class="reviewer-avatar">' + review.name.slice(0,2).toUpperCase() + '</div>\
+                        <div>\
+                            <div class="reviewer-name">' + review.name + '</div>\
+                            <div class="review-date">' + review.date + '</div>\
+                        </div>\
+                    </div>\
+                    <div class="review-rating">' + '⭐'.repeat(review.rating) + '</div>\
+                </div>\
+                <div class="review-text">' + review.text + '</div>\
+                <div class="review-helpful">\
+                    <span>Was this helpful?</span>\
+                    <button class="helpful-btn helpful-yes">👍 Yes (' + review.yes + ')</button>\
+                    <button class="helpful-btn helpful-no">👎 No (' + review.no + ')</button>\
+                </div>\
+            </div>'
+        );
+        $('.reviews-section').append($new);
+    }
 
-	// Helpful Yes/No buttons on reviews page
-	$('.reviews-section').on('click', '.helpful-btn', function () {
-		const $btn = $(this);
-		const text = $btn.text();
-		const match = text.match(/(Yes|No)\s*\((\d+)\)/i);
-		if (!match) return;
-		const label = match[1];
-		const count = parseInt(match[2], 10) || 0;
-		const next = count + 1;
-		$btn.text((label.toLowerCase() === 'yes' ? '👍 Yes ' : '👎 No ') + '(' + next + ')');
-	});
+    if ($('.reviews-section').length) {
+        // Load saved reviews on page open
+        const saved = loadSavedReviews();
+        saved.forEach(appendReviewToDOM);
+
+        // Delegate helpful buttons for saved reviews
+        $('.reviews-section').on('click', '.review-item .helpful-btn', function () {
+            const $btn = $(this);
+            const $item = $btn.closest('.review-item');
+            const id = $item.data('review-id');
+            if (!id) return; // static seed reviews: no persistence
+            let reviews = loadSavedReviews();
+            const idx = reviews.findIndex(r => r.id === id);
+            if (idx === -1) return;
+            if ($btn.hasClass('helpful-yes')) {
+                reviews[idx].yes += 1;
+            } else {
+                reviews[idx].no += 1;
+            }
+            saveReviews(reviews);
+            $item.find('.helpful-yes').text(`👍 Yes (${reviews[idx].yes})`);
+            $item.find('.helpful-no').text(`👎 No (${reviews[idx].no})`);
+        });
+    }
 
     $('.write-review-btn').on('click', function () {
         const $overlay = $('<div class="popup-overlay show"></div>').css({ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 2000, display: 'flex', justifyContent: 'center', alignItems: 'center' });
@@ -423,27 +483,20 @@ $(document).ready(function () {
                 return;
             }
 
-            const $new = $(
-                '<div class="review-item">\
-                    <div class="review-header">\
-                        <div class="reviewer-info">\
-                            <div class="reviewer-avatar">' + name.slice(0,2).toUpperCase() + '</div>\
-                            <div>\
-                                <div class="reviewer-name">' + name + '</div>\
-                                <div class="review-date">' + new Date().toLocaleDateString() + '</div>\
-                            </div>\
-                        </div>\
-                        <div class="review-rating">' + '⭐'.repeat(rating) + '</div>\
-                    </div>\
-                    <div class="review-text">' + text + '</div>\
-                    <div class="review-helpful">\
-                        <span>Was this helpful?</span>\
-                        <button class="helpful-btn">👍 Yes (0)</button>\
-                        <button class="helpful-btn">👎 No (0)</button>\
-                    </div>\
-                </div>'
-            );
-            $('.reviews-section').append($new);
+            // Persist review
+            const review = {
+                id: 'r-' + Date.now(),
+                name,
+                rating,
+                text,
+                yes: 0,
+                no: 0,
+                date: new Date().toLocaleDateString()
+            };
+            const list = loadSavedReviews();
+            list.push(review);
+            saveReviews(list);
+            appendReviewToDOM(review);
             $overlay.remove();
             showNotification('Review submitted. Thank you!', 'success');
         });
@@ -507,4 +560,7 @@ $(document).ready(function () {
     $(window).on('scroll', function () {
         lazyLoadImages();
     });
+
+    // Restore search state after bindings are set
+    restoreSearchState();
 });
