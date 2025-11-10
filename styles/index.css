@@ -137,17 +137,17 @@ body {
 }
 
 .page-layout {
-    display: grid;
-    grid-template-areas:
-        "sidebar main-content"
-        "footer footer";
-    grid-template-columns: 280px 1fr;
-    grid-template-rows: 1fr auto;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 2rem;
-    padding: 2rem;
-    min-height: calc(100vh - 100px);
+	display: grid;
+	grid-template-areas:
+		"main-content"
+		"footer";
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr auto;
+	max-width: 1200px;
+	margin: 0 auto;
+	gap: 2rem;
+	padding: 2rem;
+	min-height: calc(100vh - 100px);
 }
 
 .sidebar {
@@ -616,4 +616,20 @@ body {
     padding-top: 0.25rem;
     color: #6c757d;
     font-size: 0.9rem;
+}
+
+/* Dark mode readability overrides */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a:hover {
+	color: #ffffff;
 }

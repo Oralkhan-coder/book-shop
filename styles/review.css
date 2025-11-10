@@ -531,3 +531,43 @@ footer {
     color: #6c757d;
     font-size: 0.9rem;
 }
+
+/* Dark mode readability overrides */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a:hover {
+	color: #ffffff;
+}
+
+/* Dark mode: Customer Reviews readability and contrast */
+[data-theme="dark"] .reviews-title,
+[data-theme="dark"] .book-title,
+[data-theme="dark"] .rating-score,
+[data-theme="dark"] .meta-value,
+[data-theme="dark"] .reviewer-name {
+	color: var(--text-light);
+}
+[data-theme="dark"] .review-item {
+	background: var(--bg-secondary);
+	border-left-color: #6c757d;
+}
+[data-theme="dark"] .price-option {
+	background: var(--bg-secondary);
+	border-color: #495057;
+}
+[data-theme="dark"] .helpful-btn {
+	border-color: #495057;
+	color: var(--text-secondary);
+}
+[data-theme="dark"] .helpful-btn:hover {
+	background: rgba(255,255,255,0.06);
+}

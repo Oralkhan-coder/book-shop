@@ -23,6 +23,8 @@ $(document).ready(function () {
         $('#results-count').text(`Showing ${visibleCount} book${visibleCount !== 1 ? 's' : ''}`);
     });
 
+	// Google Books search moved to scripts/google-api.js
+
     const bookData = [];
     $('.book-item').each(function () {
         const title = $(this).data('title');
@@ -225,28 +227,39 @@ $(document).ready(function () {
         showNotification(`"${bookTitle}" added to cart!`, 'success');
     });
 
-    $('.category-list a').on('click', function (e) {
-        e.preventDefault();
-        const $link = $(this);
-        $('.category-list a').removeClass('active');
-        $link.addClass('active');
+	$('.category-list a').on('click', function (e) {
+		e.preventDefault();
+		const $link = $(this);
+		$('.category-list a').removeClass('active');
+		$link.addClass('active');
 
-        const raw = $link.text().trim();
-        const category = raw.replace(/\s*\(.*\)$/, ''); // strip counts
+		const raw = $link.text().trim();
+		const category = raw.replace(/\s*\(.*\)$/, '');
 
-        const $items = $('.book-item');
-        if (category.toLowerCase() === 'all categories') {
-            $items.show();
-        } else {
-            $items.each(function () {
-                const genre = ($(this).data('genre') || '').toString().toLowerCase();
-                $(this).toggle(genre.includes(category.toLowerCase()));
-            });
-        }
+		// If Google API module is present, use it to fetch by category (subject)
+		if (window.GoogleBooks && typeof window.GoogleBooks.loadByCategory === 'function') {
+			if (category.toLowerCase() === 'all categories') {
+				window.GoogleBooks.loadBestSellers();
+			} else {
+				window.GoogleBooks.loadByCategory(category);
+			}
+			return;
+		}
 
-        const visible = $('.book-item:visible').length;
-        $('#results-count').text(`Showing ${visible} book${visible !== 1 ? 's' : ''}`);
-    });
+		// Fallback: local filter of existing items
+		const $items = $('.book-item');
+		if (category.toLowerCase() === 'all categories') {
+			$items.show();
+		} else {
+			$items.each(function () {
+				const genre = ($(this).data('genre') || '').toString().toLowerCase();
+				$(this).toggle(genre.includes(category.toLowerCase()));
+			});
+		}
+
+		const visible = $('.book-item:visible').length;
+		$('#results-count').text(`Showing ${visible} book${visible !== 1 ? 's' : ''}`);
+	});
 
     $('.filter-btn').on('click', function () {
         const $btn = $(this);
@@ -359,6 +372,24 @@ $(document).ready(function () {
             }
         }
     })();
+
+	// FAQ accordion toggle (Contact page)
+	$('.faq-container').on('click', '.accordion-header', function () {
+		const $item = $(this).closest('.accordion-item');
+		$item.toggleClass('active');
+	});
+
+	// Helpful Yes/No buttons on reviews page
+	$('.reviews-section').on('click', '.helpful-btn', function () {
+		const $btn = $(this);
+		const text = $btn.text();
+		const match = text.match(/(Yes|No)\s*\((\d+)\)/i);
+		if (!match) return;
+		const label = match[1];
+		const count = parseInt(match[2], 10) || 0;
+		const next = count + 1;
+		$btn.text((label.toLowerCase() === 'yes' ? '👍 Yes ' : '👎 No ') + '(' + next + ')');
+	});
 
     $('.write-review-btn').on('click', function () {
         const $overlay = $('<div class="popup-overlay show"></div>').css({ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 2000, display: 'flex', justifyContent: 'center', alignItems: 'center' });
