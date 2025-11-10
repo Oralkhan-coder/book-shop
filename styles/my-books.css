@@ -189,6 +189,13 @@ main {
     box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
 }
 
+/* Dark mode: improve non-active tabs readability */
+[data-theme="dark"] .tab-btn {
+	background: var(--bg-card);
+	color: var(--text-primary);
+	border: 1px solid #495057;
+}
+
 .my-books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -506,4 +513,25 @@ footer {
     padding-top: 0.25rem;
     color: #6c757d;
     font-size: 0.9rem;
+}
+
+/* Dark mode readability overrides */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a:hover {
+	color: #ffffff;
+}
+
+/* Dark mode: card title readability */
+[data-theme="dark"] .book-title {
+	color: var(--text-light);
 }
