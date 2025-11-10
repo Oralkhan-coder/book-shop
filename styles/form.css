@@ -735,36 +735,72 @@ footer {
 .theme-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 20px var(--shadow-hover);
-
-
-footer {
-    background: transparent;
-    color: #6c757d;
-    padding: 1.5rem 0 1rem;
-    border-top: 1px solid #dee2e6;
-    margin-top: 2rem;
 }
-.footer-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-  
-.footer-section h3 { display: none; }
-.footer-section ul {
-    display: flex;
-    gap: 1rem;
-    padding: 0;
-}
-  
-.footer-section li { margin: 0; list-style: none; }
-.footer-section a { color: #6c757d; text-decoration: none; }
-.footer-section a:hover { color: #343a40; }
-.footer-bottom {
-    border-top: none;
-    padding-top: 0.25rem;
-    color: #6c757d;
-    font-size: 0.9rem;
 
+/* Dark mode readability overrides */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a {
+	color: var(--text-light);
+}
+[data-theme="dark"] .footer-section a:hover {
+	color: #ffffff;
+}
+
+/* Dark mode: inputs and interactive elements */
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+	background: var(--bg-secondary);
+	border-color: #495057;
+	color: var(--text-primary);
+}
+[data-theme="dark"] .form-group input::placeholder,
+[data-theme="dark"] .form-group textarea::placeholder {
+	color: var(--text-secondary);
+}
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group textarea:focus {
+	border-color: #6c757d;
+	box-shadow: 0 0 0 3px rgba(108,117,125,0.25);
+}
+
+/* Dark mode: accordion and FAQ states */
+[data-theme="dark"] .accordion-header:hover {
+	background: rgba(255,255,255,0.06);
+}
+[data-theme="dark"] .accordion-item {
+	border-bottom-color: #495057;
+}
+[data-theme="dark"] .accordion-content {
+	color: var(--text-primary);
+}
+
+/* Dark mode: subscription popup inputs */
+[data-theme="dark"] #subscription-form input[type="text"],
+[data-theme="dark"] #subscription-form input[type="email"] {
+	background: var(--bg-secondary);
+	border-color: #495057;
+	color: var(--text-primary);
+}
+[data-theme="dark"] .popup-container {
+	background: var(--bg-card);
+}
+
+/* Dark mode: form labels and FAQ search input */
+[data-theme="dark"] .form-group label {
+	color: var(--text-light);
+}
+[data-theme="dark"] .faq-search-box input {
+	background: var(--bg-secondary);
+	border-color: #495057;
+	color: var(--text-primary);
+}
+[data-theme="dark"] .faq-search-box input::placeholder {
+	color: var(--text-secondary);
 }

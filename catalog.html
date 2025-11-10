@@ -7,6 +7,7 @@
     <title>Catalog - PageTurner Books</title>
     <link rel="stylesheet" href="styles/catalog.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="scripts/google-api.js"></script>
     <script src="scripts/query.js"></script>
     <script src="scripts/theme.js"></script>
     <script src="scripts/guard.js"></script>
@@ -33,11 +34,6 @@
     </header>
 
     <main>
-        <div class="page-header">
-            <h1>Book Catalog</h1>
-            <p>Discover your next favorite book from our extensive collection</p>
-        </div>
-
         <div class="search-filter-section">
             <div class="search-box">
                 <input type="text" id="book-search" placeholder="Search books, authors, or genres...">
@@ -51,9 +47,6 @@
             </div>
         </div>
 
-        <div class="results-info">
-            <p id="results-count">Showing 6 books</p>
-        </div>
 
         <div class="catalog-layout">
             <aside class="sidebar">

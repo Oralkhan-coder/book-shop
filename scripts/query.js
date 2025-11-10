@@ -51,6 +51,8 @@ $(document).ready(function () {
         saveSearchState();
     });
 
+	// Google Books search moved to scripts/google-api.js
+
     const bookData = [];
     $('.book-item').each(function () {
         const title = $(this).data('title');

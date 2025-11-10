@@ -17,23 +17,6 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-const colorChangeBtn = document.getElementById('color-change-btn');
-const colors = [
-        'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
-        'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
-        'linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%)',
-        'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)',
-        'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)',
-        'linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%)'
-];
-
-let currentColorIndex = 0;
-
-colorChangeBtn.addEventListener('click', function() {
-    currentColorIndex = (currentColorIndex + 1) % colors.length;
-    document.body.style.background = colors[currentColorIndex];
-});
-
 const contactForm = document.getElementById('contact-form');
 const successMessage = document.getElementById('success-message');
 
