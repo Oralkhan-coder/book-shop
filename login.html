@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Log In - PageTurner Books</title>
+	<link rel="stylesheet" href="styles/form.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="scripts/query.js"></script>
+	<script src="scripts/theme.js"></script>
+	<script src="scripts/nav-auth.js"></script>
+	<style>
+		/* Dark mode text color tweaks for login page */
+		[data-theme="dark"] .form-container h2,
+		[data-theme="dark"] .form-container label,
+		[data-theme="dark"] .form-container .input-hint {
+			color: #e9ecef;
+		}
+		[data-theme="dark"] .form-container a {
+			color: #9ec5fe;
+		}
+		[data-theme="dark"] .form-container a:hover {
+			color: #cfe2ff;
+		}
+		/* Optional: soften input placeholder color in dark mode */
+		[data-theme="dark"] .form-container input::placeholder {
+			color: #adb5bd;
+		}
+	</style>
+	<!-- page-specific styles removed per request -->
+</head>
+<body>
+	<header>
+		<div class="header-container">
+			<div class="logo">PageTurner Books</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="catalog.html">Catalog</a></li>
+					<li><a href="my-books.html">My Books</a></li>
+					<li><a href="review.html">Reviews</a></li>
+					<li><a href="form.html">Contact</a></li>
+					<li><a href="login.html">Log In</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="form-container">
+			<div class="top-form-container">
+				<h2>Log In to Your Account</h2>
+			</div>
+			<form id="login-form" novalidate>
+				<div class="form-group">
+					<label for="li-email">Email <span class="required">*</span></label>
+					<input type="email" id="li-email" required>
+				</div>
+				<div class="form-group">
+					<label for="li-password">Password <span class="required">*</span></label>
+					<input type="password" id="li-password" required>
+				</div>
+				<button type="submit" class="submit-btn">Log In</button>
+			</form>
+			<div style="margin-top: 1rem; text-align: center;">
+				New here? <a href="signup.html">Create an account</a>
+			</div>
+		</div>
+	</main>
+
+	
+
+	<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+	<script src="scripts/auth.js"></script>
+	<script>
+		// Redirect if already logged in
+		(function(){
+			try {
+				if (localStorage.getItem('currentUserEmail')) {
+					window.location.replace('profile.html');
+				}
+			} catch (_) {}
+		})();
+		document.addEventListener('DOMContentLoaded', function(){
+			var form = document.getElementById('login-form');
+			if (form && window.Auth) {
+				form.addEventListener('submit', function(e){
+					e.preventDefault();
+					var res = Auth.login({
+						email: document.getElementById('li-email').value.trim(),
+						password: document.getElementById('li-password').value
+					});
+					if (!res.ok) { alert(res.error); return; }
+					window.location.href = 'profile.html';
+				});
+			}
+		});
+	</script>
+</body>
+</html>
+
+

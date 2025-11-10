@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Profile - PageTurner Books</title>
+	<link rel="stylesheet" href="styles/form.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="scripts/query.js"></script>
+	<script src="scripts/theme.js"></script>
+	<script src="scripts/nav-auth.js"></script>
+	<style>
+		/* Improve readability on dark mode for Profile page */
+		[data-theme="dark"] .form-container h2,
+		[data-theme="dark"] .form-container label {
+			color: #e9ecef;
+		}
+		[data-theme="dark"] #profile-name,
+		[data-theme="dark"] #profile-email,
+		[data-theme="dark"] #profile-phone {
+			color: #f8f9fa;
+		}
+		[data-theme="dark"] .submit-btn {
+			color: #f8f9fa;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="header-container">
+			<div class="logo">PageTurner Books</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="catalog.html">Catalog</a></li>
+					<li><a href="my-books.html">My Books</a></li>
+					<li><a href="review.html">Reviews</a></li>
+					<li><a href="form.html">Contact</a></li>
+					<li><a href="login.html">Log In</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="form-container">
+			<div class="top-form-container">
+				<h2>My Profile</h2>
+			</div>
+			<div class="form-group">
+				<label>Name</label>
+				<div id="profile-name"></div>
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<div id="profile-email"></div>
+			</div>
+			<div class="form-group">
+				<label>Phone</label>
+				<div id="profile-phone"></div>
+			</div>
+			<button id="logout-btn" class="submit-btn">Log Out</button>
+		</div>
+	</main>
+
+	
+
+	<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+	<script src="scripts/auth.js"></script>
+</body>
+</html>
+
+

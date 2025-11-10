@@ -47,7 +47,12 @@ function validateEmail(email) {
 }
 
 function validatePassword(password) {
-    return password.length >= 8;
+    const hasMin = password.length >= 8;
+    const hasLower = /[a-z]/.test(password);
+    const hasUpper = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecial = /[^A-Za-z0-9]/.test(password);
+    return hasMin && hasLower && hasUpper && hasNumber && hasSpecial;
 }
 
 function validatePhone(phone) {
@@ -92,7 +97,7 @@ document.getElementById('email').addEventListener('blur', function() {
 
 document.getElementById('password').addEventListener('blur', function() {
     if (!validatePassword(this.value)) {
-        showError('password', 'Password must be at least 8 characters long');
+        showError('password', 'Password must be 8+ chars with upper, lower, number, special');
     } else {
         clearError('password');
     }

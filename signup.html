@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign Up - PageTurner Books</title>
+	<link rel="stylesheet" href="styles/form.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="scripts/query.js"></script>
+	<script src="scripts/theme.js"></script>
+	<script src="scripts/nav-auth.js"></script>
+	<style>
+		/* Improve readability on dark mode for Sign Up page */
+		[data-theme="dark"] .form-container h2,
+		[data-theme="dark"] .form-container label,
+		[data-theme="dark"] .form-container .input-hint {
+			color: #e9ecef;
+		}
+		[data-theme="dark"] .form-container a {
+			color: #9ec5fe;
+		}
+		[data-theme="dark"] .form-container a:hover {
+			color: #cfe2ff;
+		}
+		[data-theme="dark"] .form-container input[type="text"],
+		[data-theme="dark"] .form-container input[type="email"],
+		[data-theme="dark"] .form-container input[type="tel"],
+		[data-theme="dark"] .form-container input[type="password"],
+		[data-theme="dark"] .form-container textarea {
+			color: #e9ecef;
+			background-color: #1f2327;
+			border-color: #495057;
+		}
+		[data-theme="dark"] .form-container input::placeholder,
+		[data-theme="dark"] .form-container textarea::placeholder {
+			color: #adb5bd;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="header-container">
+			<div class="logo">PageTurner Books</div>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="catalog.html">Catalog</a></li>
+					<li><a href="my-books.html">My Books</a></li>
+					<li><a href="review.html">Reviews</a></li>
+					<li><a href="form.html">Contact</a></li>
+					<li><a href="login.html">Log In</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="form-container">
+			<div class="top-form-container">
+				<h2>Create Your Account</h2>
+			</div>
+			<form id="signup-form" novalidate>
+				<div class="form-group">
+					<label for="su-name">Full Name <span class="required">*</span></label>
+					<input type="text" id="su-name" required>
+				</div>
+				<div class="form-group">
+					<label for="su-email">Email <span class="required">*</span></label>
+					<input type="email" id="su-email" required>
+				</div>
+				<div class="form-group">
+					<label for="su-phone">Phone</label>
+					<input type="tel" id="su-phone">
+				</div>
+				<div class="form-group">
+					<label for="su-password">Password <span class="required">*</span></label>
+					<input type="password" id="su-password" required>
+					<small class="input-hint">8+ chars with upper, lower, number, special</small>
+				</div>
+				<div class="form-group">
+					<label for="su-confirm">Confirm Password <span class="required">*</span></label>
+					<input type="password" id="su-confirm" required>
+				</div>
+				<button type="submit" class="submit-btn">Create Account</button>
+			</form>
+			<div style="margin-top: 1rem; text-align: center;">
+				Already have an account? <a href="login.html">Log In</a>
+			</div>
+		</div>
+	</main>
+
+	
+
+	<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+	<script src="scripts/auth.js"></script>
+	<script>
+		// Basic inline constraints mirroring contact form style
+		document.addEventListener('DOMContentLoaded', function () {
+			const email = document.getElementById('su-email');
+			const phone = document.getElementById('su-phone');
+			const pass = document.getElementById('su-password');
+			const confirm = document.getElementById('su-confirm');
+			function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+			function validPhone(v){ if(!v) return true; const d=v.replace(/\D/g,''); return /^[\d\s\-+()]+$/.test(v)&&d.length>=10&&d.length<=14; }
+			function validPass(v){ return v.length>=8 && /[a-z]/.test(v)&&/[A-Z]/.test(v)&&/[0-9]/.test(v)&&/[^A-Za-z0-9]/.test(v); }
+			email.addEventListener('blur', ()=>{ if(!validEmail(email.value)) alert('Please enter a valid email.'); });
+			phone.addEventListener('blur', ()=>{ if(phone.value && !validPhone(phone.value)) alert('Please enter a valid phone.'); });
+			pass.addEventListener('blur', ()=>{ if(!validPass(pass.value)) alert('Password must be 8+ chars with upper, lower, number, special.'); });
+			confirm.addEventListener('blur', ()=>{ if(confirm.value !== pass.value) alert('Passwords do not match.'); });
+		});
+	</script>
+</body>
+</html>
+
+
